@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import * as authService from '../services/auth.service.js';
 import { createUserDto, loginUserDto, refreshTokenDto, logoutUserDto, forgotPasswordDto, verifyOtpDto, resetPasswordDto, CreateUserDto } from '../dtos/auth.dto.js';
+import { z } from 'zod';
+
+const googleSignInDto = z.object({ idToken: z.string().min(1) });
 
 export class AuthController {
   async registerUser(req: Request, res: Response) {
@@ -170,6 +173,34 @@ export class AuthController {
       });
     } catch (error: any) {
       return res.status(400).json({ success: false, message: error.message });
+    }
+  }
+
+  async googleSignIn(req: Request, res: Response) {
+    try {
+      const parseData = googleSignInDto.safeParse(req.body);
+      if (!parseData.success) {
+        return res.status(400).json({ success: false, message: 'idToken is required' });
+      }
+
+      const { idToken } = parseData.data;
+      const result = await authService.googleSignIn(idToken);
+
+      return res.status(200).json({
+        success: true,
+        message: 'Google sign-in successful',
+        user: {
+          id: result.user._id,
+          email: result.user.email,
+          fullName: result.user.fullName,
+          role: result.user.role,
+          profile_image: result.user.profile_image,
+        },
+        accessToken: result.accessToken,
+        refreshToken: result.refreshToken,
+      });
+    } catch (error: any) {
+      return res.status(401).json({ success: false, message: error.message });
     }
   }
 }
