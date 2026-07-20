@@ -1,0 +1,60 @@
+# ── Flutter / Dart build artifacts ───────────────────────────────────────────
+/build/
+/coverage/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+.packages
+
+# ── Generated files ───────────────────────────────────────────────────────────
+*.g.dart
+*.freezed.dart
+
+# ── Secrets & Firebase config (contains API keys — never commit) ──────────────
+google-services.json
+GoogleService-Info.plist
+**/google-services.json
+**/GoogleService-Info.plist
+
+# ── Android signing ───────────────────────────────────────────────────────────
+android/key.properties
+**/*.keystore
+**/*.jks
+
+# ── Android build ─────────────────────────────────────────────────────────────
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/local.properties
+android/GeneratedPluginRegistrant.java
+android/gradlew
+android/gradlew.bat
+android/gradle-wrapper.jar
+
+# ── iOS build ─────────────────────────────────────────────────────────────────
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/.last_build_id
+ios/Pods/
+ios/Runner.xcworkspace/
+
+# ── Symbolication / Obfuscation ───────────────────────────────────────────────
+app.*.symbols
+app.*.map.json
+
+# ── Logs / OS ─────────────────────────────────────────────────────────────────
+*.log
+.DS_Store
+Thumbs.db
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+*.ipr
+*.iws
+.atom/
+.history
